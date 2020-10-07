@@ -14,3 +14,5 @@ const TodoItem = ({id, labelName}) => {
       React.createElement('br', {}),
   ])
 }
+
+export default TodoItem;

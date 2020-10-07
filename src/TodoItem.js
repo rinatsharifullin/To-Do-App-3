@@ -14,7 +14,10 @@ const TodoItem = ({id, labelName}) => {
   //     React.createElement('br', {}),
   // ])
 
-  return <div className="todo-item">my to do item</div>
+  return (<div className="todo-item">
+    <input type="checkbox" id={id} />
+    <label htmlFor={id} >{labelName}</label>
+  </div>)
 }
 
 export default TodoItem;

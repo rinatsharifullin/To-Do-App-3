@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import TodoItem from "./TodoItem";
-
+import "./style.css";
 const TodoItemsFromOutSide = [
   { id: "lear-react", labelName: " Learn react" },
   { id: "create-todo-app", labelName: " Create todo app" },

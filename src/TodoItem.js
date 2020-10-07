@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
+import PropTypes from "prop-types";
+export const myClassName = "todo-item";
 const TodoItem = ({ id, labelName }) => {
   // debugger
   // const id = props.id;
@@ -15,12 +15,15 @@ const TodoItem = ({ id, labelName }) => {
   // ])
 
   return (
-    <div className="todo-item">
+    <div className="myClassName">
       <input type="checkbox" id={id} />
       <label htmlFor={id}>{labelName}</label>
     </div>
   );
 };
-
+TodoItem.propTypes = {
+  id: PropTypes.string,
+  labelName: PropTypes.string,
+};
 export default TodoItem;
 // test

@@ -1,29 +1,29 @@
 import React from "react";
+
 import PropTypes from "prop-types";
-export const myClassName = "todo-item";
-const TodoItem = ({ id, labelName }) => {
-  // debugger
-  // const id = props.id;
-  // const labelName = props.labelName;
 
-  // const {id, labelName}  = props;
-
-  // return React.createElement('div',{className: 'todo-item'}, [
-  //     React.createElement('input', {type:'checkbox', id:id}),
-  //     React.createElement('label', {htmlFor: id}, labelName),
-  //     React.createElement('br', {}),
-  // ])
-
+const TodoItem = ({ id, labelName, completed, handleChange }) => {
   return (
-    <div className="myClassName">
-      <input type="checkbox" id={id} />
-      <label htmlFor={id}>{labelName}</label>
-    </div>
+    <li className={completed ? "completed" : ""}>
+      <div className="view">
+        <input
+          type="checkbox"
+          id={id}
+          className="toggle"
+          checked={completed}
+          onChange={() => handleChange(id)}
+        />
+        <label htmlFor={id}>{labelName}</label>
+      </div>
+    </li>
   );
 };
+
 TodoItem.propTypes = {
-  id: PropTypes.string,
-  labelName: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  labelName: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
+
 export default TodoItem;
-// test

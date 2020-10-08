@@ -32,12 +32,15 @@ const App = () => {
     if (todoFilter === ALL) {
       setNowShowingTodos(todos);
     } else if (todoFilter === ACTIVE) {
+      setNowShowingTodos(todos.filter((e) => !e.completed));
       // keep only unchecked items
     } else if (todoFilter === COMPLETED) {
+      setNowShowingTodos(todos.filter((e) => e.completed));
       // keep only completed items
     }
     localStorage.setItem("new-todo", JSON.stringify(newTodo));
   }, [newTodo, todoFilter]);
+  // }, [newTodo]);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -101,7 +104,8 @@ const App = () => {
         />
         <label htmlFor="toggle-all" />
         <ul className="todo-list">
-          {nowShowingTodos.map((item) => {
+          {todos.map((item) => {
+            // {nowShowingTodos.map((item) => {
             return (
               <TodoItem
                 key={item.id}
@@ -117,9 +121,9 @@ const App = () => {
       </section>
       <footer className="footer">
         <span className="todo-count">
-          <strong>2</strong> items left
+          <strong>{todos.filter((e) => !e.completed).length}</strong> items left
         </span>
-        <ul className="filter">
+        <ul className="filters">
           <li>
             <a href="#/">All</a>
           </li>

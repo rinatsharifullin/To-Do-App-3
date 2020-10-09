@@ -149,6 +149,7 @@ const App = () => {
             } } href="#/completed">Completed</a>
           </li>
         </ul>
+            <button className="clear-completed" onClick={() => {setTodos(todos.filter(todo => !todo.completed) ) }} >Clear Completed</button>
       </footer>
     </div>
   );

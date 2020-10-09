@@ -40,16 +40,17 @@ const App = () => {
     }
     setNowShowingTodos(newNowShowingTodos);
   }, [todos, todoFilter]);
-    
-  useEffect(() => {
-      localStorage.setItem("new-todo", JSON.stringify(newTodo));
-    }, [todos]);
-      
   
-
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+    
+  useEffect(() => {
+      localStorage.setItem("new-todo", JSON.stringify(newTodo));
+    }, [newTodo]);
+      
+  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -1,6 +1,6 @@
 import React from "react";
 
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const ToggleAll = ({ toggleAll, todos }) => {
   return (
@@ -25,9 +25,9 @@ ToggleAll.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       labelName: PropTypes.string.isRequired,
-      completed: Proptypes.bool.isRequired,
+      completed: PropTypes.bool.isRequired,
     })
-  ).isRequired,
+  )
 };
 
 export default ToggleAll;

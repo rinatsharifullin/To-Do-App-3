@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 import Header from "./Header";
-import ToggleAll from "./ToggleAll";
-import TodoList from "./TodoList";
+// import ToggleAll from "./ToggleAll";
+// import TodoList from "./TodoList";
 import Footer from "./Footer";
+import Main from "./Main";
 
 export const ALL = "all";
 export const ACTIVE = "active";
@@ -97,14 +98,13 @@ const App = () => {
         newTodo={newTodo}
         handleChange={setNewTodo}
       />
-      <section className="main">
-        <ToggleAll toggleAll={toggleAll} todos={todos} />
-        <TodoList
-          todos={nowShowingTodos}
-          handleChange={updateTodo}
-          handleDelete={deleteTodo}
-        />
-      </section>
+      <Main
+        toggleAll={toggleAll}
+        todos={todos}
+        nowShowingTodos={nowShowingTodos}
+        updateTodo={updateTodo}
+        deleteTodo={deleteTodo}
+      />
       <Footer
         todos={todos}
         todoFilter={todoFilter}

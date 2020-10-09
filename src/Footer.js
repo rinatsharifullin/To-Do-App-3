@@ -65,7 +65,7 @@ Footer.propTypes = {
   ).isRequired,
   todoFilter: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
-  handleClear: PropTypes.func.  isRequired,
+  handleClear: PropTypes.func.isRequired,
 };
 
 export default Footer;

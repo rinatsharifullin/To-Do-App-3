@@ -27,7 +27,7 @@ ToggleAll.propTypes = {
       labelName: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired,
     })
-  )
+  ),
 };
 
 export default ToggleAll;

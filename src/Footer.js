@@ -2,8 +2,10 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import { ALL, ACTIVE, COMPLETED } from "./App";
-const Footer = ({ todos, todoFilter, handleClick, handleClear }) => {
+
+import FilterItems from './FilterItems';
+
+const Footer = ({ todos, handleClear, handleClick, todoFilter }) => {
   return (
     <footer className="footer">
       <span className="todo-count">
@@ -13,41 +15,9 @@ const Footer = ({ todos, todoFilter, handleClick, handleClear }) => {
           : " item "}{" "}
         left
       </span>
-      <ul className="filters">
-        <li>
-          <a
-            className={todoFilter == ALL ? "selected" : ""}
-            onClick={() => {
-              handleClick(ALL);
-            }}
-            href="#/"
-          >
-            All
-          </a>
-        </li>
-        <li>
-          <a
-            className={todoFilter == ACTIVE ? "selected" : ""}
-            onClick={() => {
-              handleClick(ACTIVE);
-            }}
-            href="#/active"
-          >
-            Active
-          </a>
-        </li>
-        <li>
-          <a
-            className={todoFilter == COMPLETED ? "selected" : ""}
-            onClick={() => {
-              handleClick(COMPLETED);
-            }}
-            href="#/completed"
-          >
-            Completed
-          </a>
-        </li>
-      </ul>
+
+      <FilterItems todoFilter={todoFilter} handleClick={handleClick} />
+
       <button className="clear-completed" onClick={handleClear}>
         Clear Completed
       </button>

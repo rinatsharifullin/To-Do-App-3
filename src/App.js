@@ -29,22 +29,28 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (todoFilter === ALL) {
-      setNowShowingTodos(todos);
-    } else if (todoFilter === ACTIVE) {
-      setNowShowingTodos(todos.filter((e) => !e.completed));
-      // keep only unchecked items
+    let newNowShowingTodos;
+
+    if (todoFilter === ACTIVE) {
+      newNowShowingTodos = todos.filter((todo) => !todo.completed);
     } else if (todoFilter === COMPLETED) {
-      setNowShowingTodos(todos.filter((e) => e.completed));
-      // keep only completed items
+      newNowShowingTodos = todos.filter((todo) => todo.completed);
+    } else {
+      newNowShowingTodos = todos
     }
-    localStorage.setItem("new-todo", JSON.stringify(newTodo));
-  }, [newTodo, todoFilter]);
-  // }, [newTodo]);
+    setNowShowingTodos(newNowShowingTodos);
+  }, [todos, todoFilter]);
+    
+  useEffect(() => {
+      localStorage.setItem("new-todo", JSON.stringify(newTodo));
+    }, [todos]);
+      
+  
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTodos = [
@@ -104,8 +110,8 @@ const App = () => {
         />
         <label htmlFor="toggle-all" />
         <ul className="todo-list">
-          {todos.map((item) => {
-            // {nowShowingTodos.map((item) => {
+          {/* {todos.map((item) => { */}
+            {nowShowingTodos.map((item) => {
             return (
               <TodoItem
                 key={item.id}
@@ -121,17 +127,25 @@ const App = () => {
       </section>
       <footer className="footer">
         <span className="todo-count">
-          <strong>{todos.filter((e) => !e.completed).length}</strong> items left
+        <strong>{todos.filter((todo) => !todo.completed).length}</strong>
+        {todos.filter((todo) => !todo.completed).length != 1 ? " items " : " item "} left
         </span>
         <ul className="filters">
           <li>
-            <a href="#/">All</a>
+            <a className ={todoFilter == ALL ? "selected" : ""} 
+              onClick={() =>{
+              setTodoFilter(ALL)
+            } } href="#/">All</a>
           </li>
           <li>
-            <a href="#/active">Active</a>
+            <a className ={todoFilter == ACTIVE ? "selected" : ""} onClick={() =>{
+              setTodoFilter(ACTIVE)
+            } } href="#/active">Active</a>
           </li>
           <li>
-            <a href="#/completed">Completed</a>
+            <a className ={todoFilter == COMPLETED ? "selected" : ""} onClick={() =>{
+              setTodoFilter(COMPLETED)
+            } } href="#/completed">Completed</a>
           </li>
         </ul>
       </footer>

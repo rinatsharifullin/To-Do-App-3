@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 import TodoItem from "./TodoItem";
-import Header from './Header'
+import Header from "./Header";
+import ToggleAll from "./ToggleAll";
 
 const ALL = "all";
 const ACTIVE = "active";
@@ -37,21 +38,18 @@ const App = () => {
     } else if (todoFilter === COMPLETED) {
       newNowShowingTodos = todos.filter((todo) => todo.completed);
     } else {
-      newNowShowingTodos = todos
+      newNowShowingTodos = todos;
     }
     setNowShowingTodos(newNowShowingTodos);
   }, [todos, todoFilter]);
-  
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-    
-  useEffect(() => {
-      localStorage.setItem("new-todo", JSON.stringify(newTodo));
-    }, [newTodo]);
-      
-  
 
+  useEffect(() => {
+    localStorage.setItem("new-todo", JSON.stringify(newTodo));
+  }, [newTodo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,21 +85,16 @@ const App = () => {
   };
   return (
     <div className="todoapp">
-      <Header handleSubmit={handleSubmit} newTodo={newTodo} handleChange={setNewTodo} />
+      <Header
+        handleSubmit={handleSubmit}
+        newTodo={newTodo}
+        handleChange={setNewTodo}
+      />
       <section className="main">
-        <input
-          id="toggle-all"
-          className="toggle-all"
-          type="checkbox"
-          onChange={(e) => {
-            toggleAll(e.target.checked);
-          }}
-          checked={!todos.some((todo) => !todo.completed)}
-        />
-        <label htmlFor="toggle-all" />
+        <ToggleAll toggleAll={toggleAll} todos={todos} />
         <ul className="todo-list">
           {/* {todos.map((item) => { */}
-            {nowShowingTodos.map((item) => {
+          {nowShowingTodos.map((item) => {
             return (
               <TodoItem
                 key={item.id}
@@ -117,28 +110,55 @@ const App = () => {
       </section>
       <footer className="footer">
         <span className="todo-count">
-        <strong>{todos.filter((todo) => !todo.completed).length}</strong>
-        {todos.filter((todo) => !todo.completed).length != 1 ? " items " : " item "} left
+          <strong>{todos.filter((todo) => !todo.completed).length}</strong>
+          {todos.filter((todo) => !todo.completed).length != 1
+            ? " items "
+            : " item "}{" "}
+          left
         </span>
         <ul className="filters">
           <li>
-            <a className ={todoFilter == ALL ? "selected" : ""} 
-              onClick={() =>{
-              setTodoFilter(ALL)
-            } } href="#/">All</a>
+            <a
+              className={todoFilter == ALL ? "selected" : ""}
+              onClick={() => {
+                setTodoFilter(ALL);
+              }}
+              href="#/"
+            >
+              All
+            </a>
           </li>
           <li>
-            <a className ={todoFilter == ACTIVE ? "selected" : ""} onClick={() =>{
-              setTodoFilter(ACTIVE)
-            } } href="#/active">Active</a>
+            <a
+              className={todoFilter == ACTIVE ? "selected" : ""}
+              onClick={() => {
+                setTodoFilter(ACTIVE);
+              }}
+              href="#/active"
+            >
+              Active
+            </a>
           </li>
           <li>
-            <a className ={todoFilter == COMPLETED ? "selected" : ""} onClick={() =>{
-              setTodoFilter(COMPLETED)
-            } } href="#/completed">Completed</a>
+            <a
+              className={todoFilter == COMPLETED ? "selected" : ""}
+              onClick={() => {
+                setTodoFilter(COMPLETED);
+              }}
+              href="#/completed"
+            >
+              Completed
+            </a>
           </li>
         </ul>
-            <button className="clear-completed" onClick={() => {setTodos(todos.filter(todo => !todo.completed) ) }} >Clear Completed</button>
+        <button
+          className="clear-completed"
+          onClick={() => {
+            setTodos(todos.filter((todo) => !todo.completed));
+          }}
+        >
+          Clear Completed
+        </button>
       </footer>
     </div>
   );
